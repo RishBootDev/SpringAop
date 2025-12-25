@@ -68,4 +68,11 @@ public class LoggingAspectV2 {
     1. Aspect oriented programming is used
     2. Spring features like @Transactional, @Cacheable , @Async ,etc are used
 
+    Different use cases of Spring AOP
+
+    1. security aspects and logging
+    2. Caching aspect
+    3. Auditing aspect
+    4. Exceptional Handling aspect
+    5. Validating transactions
  */
