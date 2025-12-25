@@ -21,7 +21,7 @@ public class PersonService {
     }
 
     public Person getById(int id){
-        return repo.findById(id).orElse(null);
+        return repo.findById(id).orElseThrow(()->new RuntimeException("the user does not exist"));
     }
     public void deletePerson(int id){
         repo.deleteById(id);

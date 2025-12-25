@@ -21,6 +21,7 @@ public class LoggingAspect {
     public void logMethodCall(JoinPoint joinPoint){
 
         LOGGER.info("the method body to be called will be :{}",joinPoint.getSignature());
+        LOGGER.info("the king of the method is: {}",joinPoint.getKind());
         LOGGER.info("method called");
     }
 
