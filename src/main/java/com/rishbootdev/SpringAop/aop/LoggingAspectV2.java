@@ -4,6 +4,7 @@ package com.rishbootdev.SpringAop.aop;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
@@ -33,4 +34,38 @@ public class LoggingAspectV2 {
         LOGGER.info("hey this object is returned : {}",returnedObj);
     }
 
+    @Around("allServiceMethodPointCut()")
+    public Object logExecutionTime(ProceedingJoinPoint proceedingJoinPoint) throws Throwable{
+        Long startTime=System.currentTimeMillis();
+        Object returnedValue=proceedingJoinPoint.proceed();
+        Long endTime=System.currentTimeMillis();
+
+        Long diff=endTime-startTime;
+
+        LOGGER.info("Time taken for {} is {}",proceedingJoinPoint.getSignature(),diff);
+
+        return returnedValue;
+    }
 }
+
+
+/*
+    These are the following types of Advices in Spring AOP:
+
+    1. Before ----> Runs before the target method executes.
+    2. After -----> Runs after the method executes regardless of outcome (success or exception).
+    3. After Returning -----> Runs only if the method completes successfully.
+    4. After Throwing  -----> Runs only if the method throws an exception.
+    5. Around   -------> Wraps around the method execution (before, after)
+
+    Spring Proxy
+    =============
+
+    In Spring, a proxy is an object created by the Spring container that wraps your actual bean to add
+    cross-cutting behavior (like transactions, logging, security, caching) without modifying your business logic.
+
+    These are created only when certain conditions are met like:
+    1. Aspect oriented programming is used
+    2. Spring features like @Transactional, @Cacheable , @Async ,etc are used
+
+ */
