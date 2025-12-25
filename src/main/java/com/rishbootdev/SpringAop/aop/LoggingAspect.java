@@ -22,6 +22,7 @@ public class LoggingAspect {
     @Before("execution(* com.rishbootdev.SpringAop.service.PersonService.*(..))")
     public void logMethodCall(JoinPoint joinPoint){
 
+        // this is the named pointcut method
         LOGGER.info("the method body to be called will be :{}",joinPoint.getSignature());
         LOGGER.info("the king of the method is: {}",joinPoint.getKind());
         LOGGER.info("method called");
@@ -34,6 +35,8 @@ public class LoggingAspect {
 
     @Before("myLoggingAndAopMethodsPointCut()")
     public void transactionalMethods(JoinPoint joinpoint){
+
+        // this kind of pointcut is denoted as the inline pointcut
         LOGGER.info("the method which is annotated with the @Transactional will be called");
 
     }
